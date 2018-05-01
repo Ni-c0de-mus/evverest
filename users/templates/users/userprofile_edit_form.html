@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row p-5" style="background-color: #f8f8f8;">
+			<div class="col-md-12 p-4" style="background-color: #ffffff; border-radius: 7px;">
+				<h2 class="">Edit Profile</h2>
+
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form.non_field_errors }}
+
+					<div class="form-row">
+						<div class="form-group col-6">
+							{{ form.first_name.errors }}
+							<label for="{{ form.first_name.id_for_label }}">Name:</label>
+							{{ form.first_name }}
+				
+							{{ form.profile_pic.errors }}
+							<label for="{{ form.profile_pic.id_for_label }}">Profile Picture:</label>
+							{{ form.profile_pic }}
+				
+							{{ form.title.errors }}
+							<label for="{{ form.title.id_for_label }}">Title:</label>
+							{{ form.title }}
+					
+							{{ form.user_type.errors }}
+							<label for="{{ form.user_type.id_for_label }}">User Type:</label><br>
+							{{ form.user_type }}
+							
+							<br><br>
+							
+							{{ form.website.errors }}
+							<label for="{{ form.website.id_for_label }}">Website:</label>
+							{{ form.website }}
+						</div>
+						<div class="form-group col-6">
+							{{ form.location.errors }}
+							<label for="{{ form.location.id_for_label }}">Location:</label>
+							{{ form.location }}
+					
+							{{ form.about.errors }}
+							<label for="{{ form.about.id_for_label }}">About:</label>
+							{{ form.about }}
+						</div>
+					</div>
+		
+					<div class="form-row">
+						<div class="form-group col-4">
+							{{ form.twitter.errors }}
+							<label for="{{ form.twitter.id_for_label }}">Twitter:</label>
+							{{ form.twitter }}
+						</div>
+						<div class="form-group col-4">
+							{{ form.dribbble.errors }}
+							<label for="{{ form.dribbble.id_for_label }}">Dribbble:</label>
+							{{ form.dribbble }}
+						</div>
+						<div class="form-group col-4">
+							{{ form.github.errors }}
+							<label for="{{ form.github.id_for_label }}">Github:</label>
+							{{ form.github }}
+						</div>
+					</div>
+
+					<input class="btn btn-primary" type="submit" value="Save" />
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

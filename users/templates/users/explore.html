@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row">
+			<div id="carouselExampleControls" style="height: 350px; background-color: #a0badd" class="carousel slide w-100 pl-5 pr-5" data-ride="carousel" data-interval="5000">
+				<div class="carousel-inner pl-5 pr-5">
+					{% for post in posts|slice:":10" %}
+						{% if forloop.first %}
+						<div class="carousel-item active" style="background-image:{% if post.image %}{{ post.image.url }}{% endif %};">
+						{% else %}
+						<div class="carousel-item" style="background-image:{% if post.image %}{{ post.image.url }}{% endif %};">
+						{% endif %}
+							<div class="row p-5">
+								<div class="col-md-6 p-5">
+									<a class="d-inline-block" href="{% url 'feed:post_detail' post.id %}">
+										<h3 class=" mt-1">{{ post.title }}</h3>
+									</a>
+									<p>{{ post.author }}</p>
+									<p>{{ post.post_date }}</p>
+								</div>
+								<div class="col-md-6 p-5">
+									<p>{{ post.post_body|safe|slice:":250" }}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+					
+				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+		<div class="row p-5" style="background-color: #f8f8f8;">
+			<div class="col-md-6 p-3" style="background-color: #ffffff; border-radius: 7px;">
+				<h4 class="mb-3">New Users</h4>
+				{% for user in new_users|slice:":10" %}
+					<div class="row pt-4 pb-2 border border-bottom-0 border-left-0 border-right-0">
+						<div class="col-md-2">
+							<img class="img-fluid" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/media/profile_pics/default_pro_pic.png{% endif %}">
+						</div>
+						<div class="col-md-6">
+							{% if user.first_name != "User" %}
+								<h4 class="mt-1 mb-1">{{ user.first_name }}</h4>
+							{% else %}
+								<h4 class="mt-1 mb-1">{{ user.user|capfirst }}</h4>
+							{% endif %}
+							{% if user.userprofile.user_type == '1' %}
+								<p class="text-muted">Designer</p>
+							{% elif user.userprofile.user_type == '2' %}
+								<p class="text-muted">Developer</p>
+							{% else %}
+								<p class="text-muted">Designer & Developer</p>
+							{% endif %}
+						</div>
+						<div class="col-md-4">
+							<a class="btn btn-primary" href="{% url 'users:single_user_profile' user.pk %}">See Profile</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="col-md-6 p-3" style="background-color: #ffffff; border-radius: 7px;">
+				<h4 class="mb-3">Highest Score</h4>
+				{% for user in popular_users|slice:":10" %}
+					<div class="row pt-4 pb-2 border border-bottom-0 border-left-0 border-right-0">
+						<div class="col-md-2">
+							<img class="img-fluid" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/media/profile_pics/default_pro_pic.png{% endif %}">
+						</div>
+						<div class="col-md-6">
+							{% if user.first_name != "User" %}
+								<h4 class="mt-1 mb-1">{{ user.first_name }}</h4>
+							{% else %}
+								<h4 class="mt-1 mb-1">{{ user.user|capfirst }}</h4>
+							{% endif %}
+							<p>{{ user.user_score }}</p>
+						</div>
+						<div class="col-md-4">
+							<a class="btn btn-primary" href="{% url 'users:single_user_profile' user.pk %}">See Profile</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

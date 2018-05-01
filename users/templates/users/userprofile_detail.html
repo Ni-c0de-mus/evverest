@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row pt-5 pl-5 pr-5" style="background-color: #f8f8f8;">
+			<div class="col-md-3">
+				{% if user.userprofile.profile_pic %}
+					<img class="ist-group-item w-100" src="{{ user.userprofile.profile_pic.url }}">
+				{% else %}
+					<img class="ist-group-item img-thumbnail" alt="Default Picture" src="../evverest/static/images/default_pro_pic.png">
+				{%endif%}
+			</div>
+			<div class="col-md-9">
+				{% if user.userprofile.first_name != "User" %}
+					<h2 class="mt-1 mb-1">{{ user.userprofile.first_name }}</h2>
+				{% else %}
+					<h2 class="mt-1 mb-1">{{ user.userprofile.user|capfirst }}</h2>
+				{% endif %}
+					<h3 class="" style="font-size: 18px; font-weight: 100">{{ user.userprofile.title }}</h3>
+			</div>
+		</div>
+		<div class="row pt-5 pl-5 pr-5 pb-5" style="background-color: #f8f8f8;">
+			<div class="col-md-3">
+				<ul class="list-group w-100 d-inline-block mb-3">
+					{% if user.userprofile.location %}
+						<li class="list-group-item border-top-0 border-right-0 border-left-0">
+							<p class="mt-1 mb-1">{{ user.userprofile.location }}</p>
+						</li>
+					{% endif %}
+					<li class="list-group-item border-right-0 border-left-0">
+						Score: <p class="text-muted">{{ user.userprofile.user_score }}</p>
+					</li>
+					<li class="list-group-item border-right-0 border-left-0">
+						I'm a:
+						{% if user.userprofile.user_type == '1' %}
+							<p class="text-muted">Designer</p>
+						{% elif user.userprofile.user_type == '2' %}
+							<p class="text-muted">Developer</p>
+						{% else %}
+							<p class="text-muted">Designer & Developer</p>
+						{% endif %}
+					</li>
+					<li class="list-group-item border-bottom-0 border-right-0 border-left-0">
+						About Me:
+						{% if user.userprofile.about %}
+							<p class="text-muted">{{ user.userprofile.about }}</p>
+						{% endif %}
+					</li>
+				</ul>
+				
+				<ul class="list-group w-100 d-inline-block mb-3">
+					<li class="list-group-item border-top-0 border-right-0 border-left-0">
+						Website:
+						<a href="{{ user.userprofile.website }}" class="d-block text-muted" target="_blank">{{ user.userprofile.website }}</a>
+					</li>
+					{% if user.userprofile.twitter %}
+						<li class="list-group-item border-right-0 border-left-0">
+							Twitter: 
+							<a href="http://twitter.com/{{ user.userprofile.twitter }}" class="d-block text-muted" target="_blank">{{ user.userprofile.twitter }}</a>
+						</li>
+					{% endif %}
+					{% if user.userprofile.dribbble %}
+						<li class="list-group-item border-right-0 border-left-0">
+							Dribbble: 
+							<a href="http://dribbble.com/{{ user.userprofile.dribbble }}" class="d-block text-muted" target="_blank">{{ user.userprofile.dribbble }}</a>
+						</li>
+					{% endif %}
+					{% if user.userprofile.github %}
+						<li class="list-group-item border-bottom-0 border-right-0 border-left-0">
+							Git Hub: 
+							<a href="http://github.com/{{ user.userprofile.github }}" class="d-block text-muted" target="_blank">{{ user.userprofile.github }}</a>
+						</li>
+					{% endif %}
+				</ul>
+				<ul class="list-group w-100 d-inline-block mb-3">
+					<li class="list-group-item border-right-0 border-left-0 border-bottom-0 border-top-0">
+						Member Since: <p class="text-muted">{{ user.userprofile.join_date }}</p>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+				{% include 'feed/userpost_list_inner.html' %}
+				
+				{% if is_paginated %}
+					<ul class="pagination">
+						{% if page_obj.has_previous %}
+							<li class="pages">
+								<a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+							</li>
+						{% else %}
+							<li class="disabled pages"><span>&laquo;</span></li>
+						{% endif %}
+						{% for i in paginator.page_range %}
+							{% if page_obj.number == i %}
+								<li class="current pages">
+									<span>{{ i }}</span>
+								</li>
+							{% else %}
+								<li class="pages"><a class="pages" href="?page={{ i }}">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+						{% if page_obj.has_next %}
+							<li class="pages">
+								<a class="pages" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+							</li>
+						{% else %}
+							<li class="disabled pages"><span>&raquo;</span></li>
+						{% endif %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

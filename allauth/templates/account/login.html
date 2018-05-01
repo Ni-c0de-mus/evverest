@@ -1,0 +1,97 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row p-5" style="background-color: #f8f8f8; background-position: center center; background-repeat: no-repeat; background-size: cover;">
+	<div class="col-md-8 pr-4 mt-5 mb-5">
+		<h2 class="mb-4">Welcome to Evverest</h2>
+		<p>
+		Evverest is a place for developers and designers to connect, ask questions, and share work with your peers.
+		</p>
+		<br><br><br>
+		<div class="row justify-content-center">
+			<a class="btn btn-outline-primary" href="{{ signup_url }}">Sign Up</a>
+		</div>
+	</div>
+	<div class="col-md-4 mt-5 mb-5">
+		<div class="p-4" style="background-color: #ffffff; border-radius: 7px;">
+			<div class="mb-4">
+				<h4 class="mb-4 text-center">{% trans "Sign In" %}</h4>
+			</div>
+			<div class="">
+				{% get_providers as socialaccount_providers %}
+
+				{% if socialaccount_providers %}
+					<p>{% blocktrans with site.name as site_name %}Please sign in with one
+					of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+					for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+					<div class="socialaccount_ballot">
+						<ul class="socialaccount_providers">
+							{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+						</ul>
+						<div class="login-or">{% trans 'or' %}</div>
+					</div>
+					
+					{% include "socialaccount/snippets/login_extra.html" %}
+				{% else %}
+					<p class="message-hint">{% blocktrans %}Don't yet have an account? Sign up
+					<a class="message-hint-link" href="{{ signup_url }}">here</a>.{% endblocktrans %}</p>
+				{% endif %}
+				
+				<br>
+
+				<form class="login" method="POST" action="{% url 'account_login' %}">
+					{% csrf_token %}
+					
+					{{ form.non_field_errors }}
+					<div class="fieldWrapper">
+						{{ form.login.errors }}
+						<label for="{{ form.login.id_for_label }}">Username:</label><br>
+						{{ form.login }}
+					</div>
+					<br>
+					<div class="fieldWrapper">
+						{{ form.password.errors }}
+						<label for="{{ form.password.id_for_label }}">Password:</label><br>
+						{{ form.password }}
+					</div>
+					
+					{% if redirect_field_value %}
+						<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+					{% endif %}
+					<div class="mt-5 text-center">
+						<button class="btn btn-primary mr-3 primaryAction form-btn" type="submit">{% trans "Sign In" %}</button>
+						<a class="button secondaryAction message-hint-link" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="row p-5">
+		<div class="col-md-4 pt-5 pb-5">
+			<h4>Connect</h4>
+			<p>Evverest is home to a thriving community of talented developers and designers. It is important to connect with your peers on a deeper level to help you improve your craft and create better solutions.
+			</p>
+		</div>
+		<div class="col-md-4 pt-5 pb-5">
+			<h4>Ask Questions</h4>
+			<p>The road to innovation and creative problem solving is long and not always clear. It is important to ask questions of those who may have already faced similar challenges, or to simply gain different perspectives on something you're working on.
+			</p>
+		</div>
+		<div class="col-md-4 pt-5 pb-5">
+			<h4>Share</h4>
+			<p>It is impossible to recognize your greatest potential without asking for the opinions of others. Evverest makes it easy see your work through different perspectives, by enabling you to share what you're working on with your peers.
+			</p>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

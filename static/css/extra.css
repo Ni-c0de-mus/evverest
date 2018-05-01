@@ -1,0 +1,515 @@
+/*BASE SITE*/
+body {
+	width: 100%;
+	margin: 0px;
+	font-family: 'Droid Sans', sans-serif;
+	background-color: #F3F3F7;
+}
+
+h2 {
+	margin: 0px;
+}
+
+p {
+	margin: 0px;
+}
+
+.content {
+	margin-bottom: 100px;
+}
+
+.float-right {
+	float: right;
+}
+
+.content-right {
+	width: 650px;
+	float: right;
+	display: inline-block;
+}
+
+.half-content {
+	width: 45%;
+	max-width: 600px;
+	min-width: 300px;
+	display: inline-block;
+}
+
+.main {
+	width: 70%;
+	max-width: 800px;
+	display: inline-block;
+}
+
+.list-text {
+	margin: 15px 0px 15px 0px;
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	background-color: #3F4D6E;
+	margin: 20px 0px 20px 0px;
+}
+
+/*FORMATTING*/
+.inline-block {
+	display: inline-block;
+}
+
+
+/*MESSAGES*/
+.message-hint {
+	color: #bdc2cf;
+}
+
+.message-hint-link {
+	color: #9ba1b0;
+	text-decoration: none;
+}
+
+/*LINKS*/
+.link {
+	text-decoration: none;
+	color: #DA5532;
+}
+
+.user-profile-link {
+	text-decoration: none;
+	color: #3F4D6E;
+}
+
+.user-profile-link:hover {
+	box-shadow: 1px 1px 25px 1px #dfdfdf;
+}
+
+/*MARGINS*/
+.bottom-margin {
+	margin-bottom: 15px;
+}
+
+.more-bottom-margin {
+	margin-bottom: 30px;
+}
+
+.top-margin {
+	margin-top: 15px;
+}
+
+.more-top-margin {
+	margin-top: 30px;
+}
+
+.right-margin {
+	margin-right: 15px;
+}
+
+/*BUTTONS*/
+.btn {
+	padding: 10px 20px 10px 20px;
+	background-color: #3F4D6E;
+	color: #ffffff;
+	font-size: 14px;
+	border: 1px solid #3F4D6E;
+	text-decoration: none;
+}
+
+.btn:hover {
+	background-color: #ffffff;
+	color: #3F4D6E;
+}
+
+.btn-wide {
+	width: 100%;
+	padding: 10px 20px 10px 20px;
+	background-color: #3F4D6E;
+	color: #ffffff;
+	font-size: 14px;
+	border: 1px solid #3F4D6E;
+	text-decoration: none;
+}
+
+.btn-wide:hover {
+	background-color: #ffffff;
+	color: #3F4D6E;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*PAGINATION*/
+.pagination {
+	list-style: none;
+	margin-top: 25px;
+}
+
+.pages {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #ffffff;
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	color: #3F4D6E;
+}
+
+.current {
+	background-color: #3F4D6E;
+	color: #ffffff;
+}
+
+.pages:hover {
+	background-color: #3F4D6E;
+	color: #ffffff;
+}
+
+/*SIDEBAR*/
+.sidebar {
+	width: 250px;
+	float: right;
+}
+
+.widget {
+	width: 250px;
+	margin-bottom: 25px;
+}
+
+.social {
+	width: 250px;
+	height: 50px;
+	display: block;
+	line-height: 50px;
+	text-align: center;
+	margin-bottom: 15px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.facebook {
+	background-color: #3b5998;
+}
+
+.pinterest {
+	background-color: #bd081c;
+}
+
+/*FORMS*/
+.form-title {
+	width: 480px;
+	height: 50px;
+	padding-top: 10px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	line-height: 50px;
+}
+
+.form-title-text {
+	color: #3F4D6E;
+	font-size: 25px;
+	text-align: center;
+}
+
+input[type="text"], 
+input[type="url"], 
+input[type="file"], 
+input[type="password"], 
+input[type="email"] {
+	display: block;
+	width: 400px;
+	height: 25px;
+	font-size: 18px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+textarea {
+	display: block;
+	width: 400px;
+	height: 200px;
+	font-size: 18px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	max-width: 400px;
+}
+
+.user-forms-base {
+	margin: 0 auto;
+	width: 410px;
+	background-color: #ffffff;
+	padding: 35px;
+}
+
+.form-btn {
+	padding: 10px 15px 10px 15px;
+	background-color: #3F4D6E;
+	border: 1px solid #3F4D6E;
+	color: #ffffff;
+	font-size: 14px;
+	margin-right: 20px;
+}
+
+.form-btn:hover {
+	background-color: #ffffff;
+	border: 1px solid #3F4D6E;
+	color: #3F4D6E;
+}
+
+/*NAVBAR*/
+nav {
+	width: 100%;
+	height:50px;
+	line-height: 50px;
+	margin-bottom: 50px;
+	background-color: #3F4D6E;
+}
+
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.brand {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 24px;
+}
+
+.navbar {
+	float: right;
+}
+
+.nav-link {
+	padding: 15px 20px 16px 20px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.nav-link:hover {
+	padding: 15px 20px 16px 20px;
+	color: #3F4D6E;
+	background-color: #ffffff;
+}
+
+.accent {
+	color: #92BADD;
+}
+
+/*FOOTER*/
+footer {
+	background-color: #3F4D6E;
+	margin-top: 50px;
+	height: 50px;
+	line-height: 50px;
+}
+
+.footer-left {
+	height: 50px;
+	display: inline-block;
+}
+
+.footer-right {
+	display: inline-block;
+	float: right;
+}
+
+.footer-link {
+	margin-left: 20px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.footer-link:hover {
+	color: #eaeaea;
+}
+
+/*SIGN UP PAGE*/
+
+
+
+/*PROFILE*/
+.sidebar-userinfo {
+	width: 275px;
+	display: inline-block;
+	border-right: 1px solid #cecece;
+	padding-right: 20px;
+}
+
+.profile-pic {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.profile-top-info {
+	float: right;
+	width: 150px;
+	height: 80px;
+	margin-top: 10px;
+}
+
+.profile-name {
+	margin-bottom: 15px;
+}
+
+.small-text {
+	font-size: 12px;
+}
+
+.same-line {
+	display: inline;
+}
+
+.profile-info {
+	margin-top: -15px;
+}
+
+.profile-info-group {
+	margin-top: 30px;
+}
+
+/*ALL USERS LIST*/
+.user-card {
+	width: 250px;
+	background-color: #ffffff;
+	padding: 25px;
+	display: inline-block;
+	margin: 15px;
+}
+
+.user-card-spacing {
+	
+}
+
+.user-card-name {
+	text-align: center;
+}
+
+.user-card-type {
+	text-align: center;
+}
+
+/*
+.user-card-score-group {
+	width: 50px;
+	margin: 0 auto;
+}
+
+.user-card-score-title {
+	margin-right: 10px;
+}
+
+.user-card-score {
+}
+*/
+
+
+/*FEED*/
+.posts {
+	margin-top: 70px;
+}
+
+.single-post {
+	margin-top: 50px;
+	background-color: #ffffff;
+	padding: 30px;
+}
+
+.post-body {
+	margin-bottom: 15px;
+}
+
+.post-interaction {
+	float: right;
+	display: inline-block;
+}
+
+.post-meta {
+	display: inline;
+	margin-right: 20px;
+}
+
+.single-comment {
+	width: 100%;
+	margin: 20px 0px 20px 0px;
+}
+
+.post-pic {
+	max-width: 600px;
+	margin: 0 auto;
+	display: block;
+}
+
+.post-content {
+	margin-top: 30px;
+}
+
+.meta-info {
+	
+}
+
+.liked {
+	padding: 10px;
+	background-color: #ffffff;
+	border: 1px solid #DA5532;
+	color: #DA5532;
+	border-radius: 10px;
+}
+
+.like {
+	padding: 10px;
+	background-color: #DA5532;
+	border: 1px solid #DA5532;
+	color: #ffffff;
+	border-radius: 10px;
+}
+
+/*NOTIFY*/
+.notify {
+	width: 100%;
+	height: 40px;
+	padding: 10px;
+}
+
+.notify-unread {
+	background-color: #cd988a;
+}
+
+.notify-read{
+	background-color: #E7E7F1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

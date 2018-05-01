@@ -1,0 +1,66 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row pt-5 pb-5 justify-content-md-center" style="background-color: #f8f8f8;">
+	<div class="col-md-4 mt-5 mb-5">
+		<div class="p-4" style="background-color: #ffffff; border-radius: 7px;">
+			<div class="mb-4">
+				<h2 class="mb-4 text-center">{% trans "Sign Up" %}</h2>
+			</div>
+			
+			<div class="">
+				<p class="message-hint">{% blocktrans %}Already have an account? Then please <a class="message-hint-link" href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+			
+				<br>
+				
+				<form class="form-group" id="signup_form" method="post" action="{% url 'account_signup' %}">
+					{% csrf_token %}
+					
+					{{ form.non_field_errors }}
+					<div class="fieldWrapper">
+						{{ form.email.errors }}
+						<label for="{{ form.email.id_for_label }}">Email:</label><br>
+						{{ form.email }}
+					</div>
+					<br>
+					{{ form.non_field_errors }}
+					<div class="fieldWrapper">
+						{{ form.username.errors }}
+						<label for="{{ form.username.id_for_label }}">Username:</label><br>
+						{{ form.username }}
+					</div>
+					<br>
+					{{ form.non_field_errors }}
+					<div class="fieldWrapper">
+						{{ form.password1.errors }}
+						<label for="{{ form.password1.id_for_label }}">Password:</label><br>
+						{{ form.password1 }}
+					</div>
+					<br>
+					{{ form.non_field_errors }}
+					<div class="fieldWrapper">
+						{{ form.password2.errors }}
+						<label for="{{ form.password2.id_for_label }}">Password (again):</label><br>
+						{{ form.password2 }}
+					</div>
+					
+					{% if redirect_field_value %}
+						<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+					{% endif %}
+					<div class="mt-5 text-center">
+						<button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load notify_extras %}
+
+<html lang="en">
+	<head>
+		<!-- Global Site Tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107205400-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments)};
+		  gtag('js', new Date());
+		
+		  gtag('config', 'UA-107205400-1');
+		</script>
+		
+		<title>Fake Evverest</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta charset="uft-8">
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Droid+Sans|Mukta+Mahee|Noto+Sans" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		
+		<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			#mc_embed_signup{background:#333a40; clear:left; font:14px Helvetica,Arial,sans-serif; }
+			.indicates-required{color:#333a40}
+			div.mc-field-group label{color:#333a40}
+			/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+			We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+		</style>
+	</head>
+	
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark p-0" style="background-color: #434e6e;">
+			<a class="navbar-brand text-light p-0" href="{% url 'index' %}">
+				<img class="" src="/static/images/web-logo.jpg" alt="web-logo" width="60" height="60" />
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link text-light" style="padding: 18px 10px 18px 10px;" href="{% url 'index' %}">Home</a>
+					</li>
+					{% if request.user.is_authenticated %}
+						<li class="nav-item ml-3">
+							<a class="nav-link text-light" style="padding: 18px 10px 18px 10px;" href="{% url 'users:explore' %}">
+								Explore
+							</a>
+						</li>
+						<li class="nav-item ml-3">
+							<div class="dropdown">
+								<button class="nav-link text-light" style="padding: 18px 10px 18px 10px; background-color: #434e6e; border: none;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ request.user.username|capfirst }}
+									{% notseen request as NS %}
+										{% if NS %}
+											<span class="badge badge-pill badge-light" style="color: #ffffff; font-size: 4px; vertical-align: top;">.</span>
+										{% endif %}
+								</button>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="{% url 'users:user_profile' %}">Profile</a>
+									<a class="dropdown-item" href="{% url 'notify:user_notifications' %}">
+										Notifications
+										{% notseen request as NS %}
+										{% if NS %}
+											<span class="badge badge-pill badge-dark" style="color: #000000; font-size: 4px; vertical-align: top;">.</span>
+										{% endif %}
+									</a>
+									<a class="dropdown-item" href="{% url 'users:user_profile_edit' %}">Settings</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+								</div>
+							</div>
+						</li>
+						<li class="nav-item ml-3">
+							<a class="nav-link text-light" style="background-color: #DA5532; padding: 18px 50px 18px 50px;" href="{% url 'feed:new_post' %}">New Post</a>
+						</li>
+					{% else %}
+						<li class="nav-item ml-3">
+							<a class="nav-link text-light" style="padding: 18px 10px 18px 10px;" href="{% url 'account_login' %}?next=/">Login</a>
+						</li>
+						<li class="nav-item ml-3">
+							<a class="nav-link text-light" style="padding: 18px 10px 18px 10px;" href="{% url 'account_signup' %}?next=/">Register</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+	</nav>
+	
+	{% block content %}
+	{% endblock %}
+
+	
+	{% include 'footer.html' %}
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

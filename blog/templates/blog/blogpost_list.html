@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div class="main">
+		{% if request.user.is_authenticated and request.user.userprofile.user_level == 'admin' or request.user.userprofile.user_level == 'author' %}
+			<a class="btn float-right" href="{% url 'blog:new_blog_post' %}">New Blog Post</a>
+		{% endif %}
+		
+		<div class="posts">
+			{% for blog in blogpost_list %}
+				<div class="single-post">
+					<a class="link" href="{% url 'blog:blogpost_detail' blog.id %}">
+						<h2 class="post-title">{{ blog.title }}</h2>
+					</a>
+				
+					{% if blog.image %}
+						<img class="post-pic" src="{{ blog.image.url }}">
+					{% endif %}				
+				
+					<p class="post-body more-top-margin">{{ blog.post_body }}</p>
+					<p class="message-hint post-meta">{{ blog.author }}</p>
+					<p class="message-hint post-meta">{{ blog.post_date }}</p>
+					<a class="link right-margin" href="{% url 'blog:blogpost_detail' blog.id %}">
+						Comments: {{ blog.comments.count }}
+					</a>
+					{% if request.user.is_authenticated and request.user == blog.author or request.user.userprofile.user_level == 'admin' or request.user.userprofile.user_level == 'moderator' %}
+						<a class="link right-margin" href="{% url 'blog:edit_blogpost' blog.id %}">
+							Edit Post
+						</a>
+						<a class="link right-margin" href="{% url 'blog:delete_blogpost' blog.id %}">
+							Delete Post
+						</a>
+					{% endif %}
+				</div>
+			{% endfor %}
+			
+			{% if is_paginated %}
+				<ul class="pagination">
+					{% if page_obj.has_previous %}
+						<li class="pages"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+					{% else %}
+						<li class="disabled pages"><span>&laquo;</span></li>
+					{% endif %}
+					{% for i in paginator.page_range %}
+						{% if page_obj.number == i %}
+							<li class="current pages">
+								<span>{{ i }}</span>
+							</li>
+						{% else %}
+							<li class="pages"><a class="pages" href="?page={{ i }}">{{ i }}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if page_obj.has_next %}
+						<li class="pages">
+							<a class="pages" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+						</li>
+					{% else %}
+						<li class="disabled pages"><span>&raquo;</span></li>
+					{% endif %}
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	
+	{% include 'sidebar.html' %}
+
+{% endblock %}

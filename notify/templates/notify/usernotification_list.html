@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container-fluid" style="background-color: #f8f8f8;">
+	<div class="row p-5">
+		<div class="col-md-9">
+			{% for notify in notifies %}
+				<div class="pr-3 pt-3 pl-3 mb-3 {% if notify.read == False %}text-danger{% else %}text-secondary{% endif %}" style="background-color: #ffffff; border-radius: 7px;">
+					<p class="d-inline-block">
+						Your post <a href="{{ notify.post 'feed:post_detail' notify.post.id }}">{{ notify.post }}</a> has received a new {{ notify.notify_type }} from <b>{{ notify.fromUser }}</b>.
+					</p>
+					<a class="d-inline-block" href="{% url 'notify:user_notify_toggle' notify.id %}">Mark Read</a>
+				</div>
+			{% endfor %}
+			
+			{% if is_paginated %}
+				<ul class="pagination">
+					{% if page_obj.has_previous %}
+						<li class="pages">
+							<a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+						</li>
+					{% else %}
+						<li class="disabled pages"><span>&laquo;</span></li>
+					{% endif %}
+					{% for i in paginator.page_range %}
+						{% if page_obj.number == i %}
+							<li class="current pages">
+								<span>{{ i }}</span>
+							</li>
+						{% else %}
+							<li class="pages"><a class="pages" href="?page={{ i }}">{{ i }}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if page_obj.has_next %}
+						<li class="pages">
+							<a class="pages" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+						</li>
+					{% else %}
+						<li class="disabled pages"><span>&raquo;</span></li>
+					{% endif %}
+				</ul>
+			{% endif %}
+		</div>
+		<div class="col-md-3">
+			{% include 'sidebar.html' %}
+		</div>
+	</div>
+	</div>
+{% endblock %}

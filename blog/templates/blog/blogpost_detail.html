@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div class="main">
+		<div class="single-post">
+		<h1 class="posttitle">{{ blogpost.title }}</h1>
+		
+		{% if blogpost.image %}
+			<img class="post-pic" src="{{ blogpost.image.url }}">
+		{% endif %}
+	
+		<p class="more-top-margin">{{ blogpost.post_body }}</p>
+	
+		<div class="meta-info more-top-margin">
+			<p class="message-hint post-meta">{{ blogpost.author }}</p>
+			<p class="message-hint post-meta">{{ blogpost.post_date }}</p>
+			{% if request.user.is_authenticated and request.user == blogpost.author or request.user.userprofile.user_level == 'admin' or request.user.userprofile.user_level == 'moderator' %}
+				<a class="link right-margin" href="{% url 'blog:edit_blogpost' blogpost.id %}">
+					Edit Post
+				</a>
+				<a class="link right-margin" href="{% url 'blog:delete_blogpost' blogpost.id %}">
+					Delete Post
+				</a>
+			{% endif %}
+		</div>
+		
+		<div class="divider"></div>
+	
+	
+		<a class="link" href="{% url 'blog:add_blog_comment' blogpost.id %}">Add Comment</a>
+		{% for comment in blogpost.comments.all %}
+			{% if user.is_authenticated %}
+				<div class="single-comment">
+					<p class="bottom-margin">{{ comment.comment_body }}</p>
+					<p class="message-hint post-meta">Author: {{ comment.author }}</p>
+					<p class="message-hint post-meta">{{ comment.comment_date }}</p>
+					{% if request.user.is_authenticated and request.user == comment.author or request.user.userprofile.user_level == 'admin' or request.user.userprofile.user_level == 'moderator' %}
+						<a class="link" href="{% url 'blog:remove_blog_comment' pk=comment.pk %}">
+							Delete Comment
+						</a>
+					{% endif %}
+				</div>
+			{% endif %}
+			{% empty %}
+			<p>No Comments</p>
+		{% endfor %}
+		</div>
+	</div>
+	
+	{% include 'sidebar.html' %}
+
+{% endblock %}
